@@ -1,42 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:lesser_app/questions.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      questionIndex = questionIndex + 1;
+    });
+    print(questionIndex);
+  }
+  var questions  = [
+    'What\'s your name?',
+    'What\'s your age?',
+    'What\'s your favorite color?',
+  ];
 
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     // creating lists of widgets
-    var questions = [
-      "What'syour name",
-      "What is your age",
-      "What is your favorite color",
-    ];
+
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
+              centerTitle: true,
+              // ignore: prefer_const_constructors
               title: Text('New Year App'),
             ),
             body: Column(
-              children: const [
-                Text('The Question'),
+              children: [
+                Question(
+                  questions[questionIndex]
+                ),
                 ElevatedButton(
-                  onPressed: null,
+                  onPressed: () => answerQuestion(),
+                  // ignore: prefer_const_constructors
                   child: Text('Answer 1'),
                 ),
-                ElevatedButton(
-                  onPressed: null,
+                 ElevatedButton(
+                  onPressed: () => print('Answer Million 2'),
+                  // ignore: prefer_const_constructors
                   child: Text('Answer 2'),
                 ),
-                ElevatedButton(
-                  onPressed: null,
-                  child: Text('Answer 3'),
-                ),
-              ],
-            )));
+              ],// ignore: prefer_const_constructors
+            ),
+            )
+            );
   }
 }
